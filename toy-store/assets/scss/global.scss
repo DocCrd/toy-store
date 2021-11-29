@@ -1,0 +1,65 @@
+// @import "nulling.scss";
+// @import "./vars/variables.scss";
+// @import "catalogue.scss";
+// @import "cart.scss";
+
+.nav {
+  font-weight: bold;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: $gapgrid;
+  grid-row-gap: $gapgrid;
+  width: 100%;
+}
+
+
+/* On screens that are 992px wide or less, go from four columns to two columns */
+@media screen and (max-width: 992px) {
+  .container{
+  	max-width: 80%;
+  	margin-left: auto;
+  	margin-right: auto;
+    padding-left: $gpadding;
+    padding-right: $gpadding;
+  }
+
+  .nav {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: $gpadding;
+    padding-right: $gpadding;
+  }
+
+}
+
+/* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .container {
+  	max-width: 100%;
+  	grid-template-columns: repeat(1, 1fr);
+  	margin: 0;
+  	padding: 0;
+  }
+
+  .nav {
+    max-width: 100%;
+    grid-template-columns: repeat(1, 1fr);
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.btn {
+  border: 1px dotted black;
+  height: 30px;
+  &:hover {
+    border: 1px solid black
+  }
+}
+
+
+

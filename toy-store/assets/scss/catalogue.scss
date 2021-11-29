@@ -1,0 +1,32 @@
+.gallery__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.element {
+  max-height: 600px;
+  padding: $gpadding;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  border: 2px solid black;
+}
+
+.img-frame {
+  padding: $gpadding;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.trent {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  text-align: center;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.title {
+  font-size: $textsize;
+}
