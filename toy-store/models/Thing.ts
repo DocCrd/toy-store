@@ -9,5 +9,6 @@ export default interface Thing {
     rate: number
     count: number
   },
-  cart: boolean
+  cart: boolean,
+  qnt: number
 }

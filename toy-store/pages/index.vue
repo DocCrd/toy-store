@@ -28,22 +28,27 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Context } from '@nuxt/types'
 import { stuffStore } from '~/store'
+import Thing from '@/models/Thing'
 
 
 @Component({
   async asyncData({ $axios } : Context) {
-    const stuff = await $axios.$get('https://fakestoreapi.com/products')
-    return { stuff }
+    if (stuffStore.stuff.length === 0) {
+      const stuff = await $axios.$get('https://fakestoreapi.com/products')
+      return { stuff }
+    }
   }
 })
 export default class extends Vue {
   // Declared as component data
-  stuff = []
+  stuff: Thing[] =[]
   check: boolean = false
 
   mounted() {
     if(stuffStore.stuff.length === 0) {
       stuffStore.addstuff(this.stuff)
+    } else {
+      this.stuff = stuffStore.stuff
     }
   }
 
@@ -60,7 +65,7 @@ export default class extends Vue {
     this.statusChanger = !this.statusChanger
     setTimeout(() => {
       this.statusChanger = !this.statusChanger
-    }, 2000)
+    }, 1200)
     
   }
 

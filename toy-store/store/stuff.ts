@@ -5,7 +5,8 @@ export interface IStuffState {
   stuff: Thing[]
 }
 
-@Module({ stateFactory: true, namespaced: true, name: 'stuff' })
+
+@Module({ stateFactory: true, namespaced: true, name: 'stuff', preserveState: true })
 export default class Stuff extends VuexModule implements IStuffState {
   stuff: Thing[] = []
 
@@ -21,22 +22,51 @@ export default class Stuff extends VuexModule implements IStuffState {
         category: thing.category,
         image: thing.image,
         rating: thing.rating,
-        cart: false
+        cart: false,
+        qnt: 0
       }
       this.stuff = [...this.stuff, storeThing]
     })
   }
 
   @Mutation
-  manipulate(id: number) {
+  manipulate(id: number, add: boolean = true) {
+    if (!add) {
+      this.stuff[id - 1].qnt = 0
+      this.stuff[id - 1].cart = false
+      return;
+    }
 
-    this.stuff[id - 1].cart = !this.stuff[id - 1].cart
+    let qnt = this.stuff[id - 1].qnt
+    
+    if (!qnt) {
+      this.stuff[id - 1].cart = true
+    }
+    
+    this.stuff[id - 1].qnt++
   }
 
   @Mutation
   remove() {
 
     this.stuff = []
+  }
+
+  @Mutation
+  clearChecks() {
+
+    this.stuff.forEach(el => {
+      if (el.cart) {
+        el.cart = !el.cart
+      }
+      el.qnt = 0
+    })
+  }
+
+  @Mutation
+  loggme() {
+
+    //localStorage.vuex = { stuff: this.stuff }
   }
 
 }

@@ -7,13 +7,16 @@
       </div>
     </div>
     <div class="cart-thing" v-for="(thing, idx) in tobuy">
-      <div class="title-cart">{{thing.title}}</div>
-      <div class="price-cart">{{thing.price}}$</div>
+      <div class="title-price">
+        <div class="title-cart">{{thing.title}}</div>
+        <div class="price-cart">{{thing.price}}$</div>
+      </div>
+      <div class="cart-qnt">{{thing.qnt + 'шт.'}}</div>
       <button class="btn" v-if="false" @click="cart(thing.id)">Удалить</button>
     </div>
     <div v-if="overal">
-      <div class="total">Итого {{overal}}$</div>
-      <button class="checkout btn" @click="statusChanger=!statusChanger; cartRemoveAll()">Оформить заказ</button>
+      <div class="total">Итого {{Math.round(overal)}}$</div>
+      <button class="checkout btn" @click="statusChanger=!statusChanger; cartClearChecks()">Оформить заказ</button>
     </div>
     <div v-else class="warning">Ничего не выбрано!</div>
   </div>
@@ -39,7 +42,7 @@ export default class extends Vue {
       }
     }
     for(let i = 0; i < this.tobuy.length; i++) {
-      this.overal += this.tobuy[i].price
+      this.overal += (this.tobuy[i].price * this.tobuy[i].qnt)
     }
   }
 
@@ -47,8 +50,12 @@ export default class extends Vue {
     stuffStore.manipulate(id)
   }
 
-  cartRemoveAll() {
-    stuffStore.remove()
+  // cartRemoveAll() {
+  //   stuffStore.remove()
+  // }
+
+  cartClearChecks() {
+    stuffStore.clearChecks()
   }
 
   get statusChanger() {

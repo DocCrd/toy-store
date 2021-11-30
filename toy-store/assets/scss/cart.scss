@@ -4,9 +4,31 @@
 .warning {
   font-size: $textsize;
 }
+
 .cart-thing {
+  display: flex;
   border: 1px solid black;
   margin-bottom: 5px;
+}
+
+.cart-qnt {
+  font-weight: bold;
+  font-size: $textsize;
+  position: absolute;
+  right: $gpadding;
+  padding-top: $gpadding;
+}
+
+@media screen and (max-width: 600px) {
+  .cart-thing {
+    display: block;
+  }
+
+  .cart-qnt {
+    position: static;
+    padding-left: 0;
+    padding-top: 0;
+  }
 }
 
 .modal {

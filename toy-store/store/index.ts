@@ -10,4 +10,4 @@ export const actions = {
     }
 };
 const initializer = (store: Store<any>) => initialiseStores(store);
-export const plugins = [initializer];
+export const plugins = [initializer]
