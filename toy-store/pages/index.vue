@@ -37,6 +37,8 @@ import Thing from '@/models/Thing'
       const stuff = await $axios.$get('https://fakestoreapi.com/products')
       return { stuff }
     }
+    // const stuff = await $axios.$get('https://fakestoreapi.com/products')
+    //   return { stuff }
   }
 })
 export default class extends Vue {
@@ -45,7 +47,7 @@ export default class extends Vue {
   check: boolean = false
 
   mounted() {
-    if(stuffStore.stuff.length === 0) {
+    if(!stuffStore.stuff.length) {
       stuffStore.addstuff(this.stuff)
     } else {
       this.stuff = stuffStore.stuff

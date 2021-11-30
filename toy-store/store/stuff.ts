@@ -12,8 +12,7 @@ export default class Stuff extends VuexModule implements IStuffState {
 
   @Mutation
   addstuff(things: Thing[]) {
-
-    things.forEach((thing) => {
+    this.stuff = things.map(thing => {
       let storeThing:Thing = {
         id: thing.id,
         title: thing.title,
@@ -25,7 +24,7 @@ export default class Stuff extends VuexModule implements IStuffState {
         cart: false,
         qnt: 0
       }
-      this.stuff = [...this.stuff, storeThing]
+      return storeThing
     })
   }
 

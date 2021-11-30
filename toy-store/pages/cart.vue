@@ -36,14 +36,17 @@ export default class extends Vue {
   overal: number = 0
   check: boolean = false
   mounted() {
-    for(let i = 0; i < stuffStore.stuff.length; i++) {
-      if (stuffStore.stuff[i].cart) {
-        this.tobuy.push(stuffStore.stuff[i])
+
+    stuffStore.stuff.forEach(thing => {
+      if (thing.cart) {
+        this.tobuy.push(thing)
       }
-    }
-    for(let i = 0; i < this.tobuy.length; i++) {
-      this.overal += (this.tobuy[i].price * this.tobuy[i].qnt)
-    }
+    })
+
+    this.tobuy.forEach((thing:Thing) => {
+      this.overal += (thing.price * thing.qnt)
+    })
+
   }
 
   cart(id: number) {
